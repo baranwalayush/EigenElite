@@ -20,6 +20,12 @@ Vector<T>::Vector(u32 theSize) {
     m_Data = new T(m_Size);
 }
 
+template<class T>
+Vector<T>::~Vector()
+{
+    delete[] m_Data;
+}
+
 template <class T>
 void Vector<T>::Print() {
     for (int i = 0; i < this->m_Size; i++) {

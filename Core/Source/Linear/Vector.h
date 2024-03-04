@@ -11,6 +11,7 @@ class Vector {
     public:
         Vector<T>();
         Vector(u32 theSize);
+        ~Vector();
 
         void Print();
 
