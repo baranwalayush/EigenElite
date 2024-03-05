@@ -19,3 +19,6 @@
 
 #define f32 float
 #define f64 double
+
+#define MAX(X,Y) ((X>Y) ? X : Y)
+#define MIN(X,Y) ((X<Y) ? X : Y)

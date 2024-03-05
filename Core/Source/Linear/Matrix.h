@@ -1,6 +1,9 @@
 #pragma once
 #include "defines.h"
 
+#include "Vector.h"
+#include <iostream>
+
 template<typename T>
 class Matrix
 {
@@ -9,21 +12,21 @@ public:
 	{
 	private:
 		size_t m_i;
-		Array2d<T>& m_array2d;
+		Matrix<T>& m_array2d;
 
 	public:
-		DoubleSubscript(size_t _i, Array2d<T>& _array2d)
+		DoubleSubscript(size_t _i, Matrix<T>& _array2d)
 			: m_i(_i), m_array2d(_array2d) {}
 
 		T& operator[](size_t _j)
 		{
-			return m_array2d.m_array[_j + m_i * m_array2d.m_Y];
+			return m_array2d.m_Data[_j + m_i * m_array2d.m_Y];
 		}
 	};
 
 	Matrix() = delete;
 	Matrix(size_t theX, size_t theY);
-	Matrix(Matrix& theMatrix);
+	Matrix(const Matrix& theMatrix);
 	Matrix(Matrix&& theMatrix);
 	~Matrix();
 
@@ -34,19 +37,21 @@ public:
 	}
 
 	void Print();
-	void GetRow(int theRow);
-	void GetColumn(int theColumn);
-	void Transpose();
+	Matrix<T> Transpose();
 	i64 Trace();
-	Matrix& Inverse();
+
+	Vector<T> GetRow(size_t theRow); // error: Return Reference --> Dangling Refernce
+	Vector<T> GetColumn(size_t theCol);
+
+	Matrix<T> Inverse();
 	int Rank();
 
 	inline T At(size_t theX, size_t theY) const;
 
 private:
-	T* m_Data;
-	size_t m_Size;
 	size_t m_X, m_Y;
+	size_t m_Size;
+	T* m_Data;
 };
 /*
 member data
