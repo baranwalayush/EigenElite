@@ -52,6 +52,7 @@ member function
 - eigenValues
 - vector_product(Vector)
 
+--------------------------------------------------
 
 class Transform
 member function
@@ -60,6 +61,8 @@ member function
 - scale(\<dataType>, \<dataType>) // potential error dataType should be compatible
 - rotate(\<dataType>, \<dataType>)
 - translate(\<dataType>, \<dataType>)
+
+--------------------------------------------------
 
 class Vector\<data, dataTypes\>
 member data
@@ -72,14 +75,67 @@ member functions
 - operator=(Vector)
 - operator==(Vector)
 - operator\[](int)
+- push_back()
+- emplace_back()
+- reserve()
+- getSize()
+
+
+------------------------------------------
+specialized in vec2
 - dot(Vector)
 - cross(Vector)
 - magnitude
 - distance(Vector)
 - emplace(...)
 
+--------------------------------------------------
+PHYSICS
+--------------------------------------------------
+class PhysicsObject: abstract
+member data
+position: vec2
+velocity: vec2
+
+member functions
+set velocity
+set position
+update(Time t)
+
+--------------------------------------------------
+
+class PhysicsEngine
+member data:
+gravity: Vec2
+Vector physicsObjs
+
+member functions
+set gravity
+add physicsObjs
+simulate(Time t)
+
+--------------------------------------------------
+
+class Collider: PhysicsObject
+member data
+Shape obj;
+
+--------------------------------------------------
+class Shape
+member data
+type
+
+member function
+get type()
+
+--------------------------------------------------
+enum Shape {
+- ...
+- ...
+}
 
 # Potential Errors
 
 - if wrong_statements {} no else statements
 - incorrect placement of \#error
+- for loop i = 0 to i <= n will cause segmentation fault
