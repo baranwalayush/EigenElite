@@ -98,12 +98,6 @@ void Vector<T>::Print() {
 }
 
 template<class T>
-inline size_t Vector<T>::GetSize() const
-{
-    return m_Size;
-}
-
-template<class T>
 void Vector<T>::PushBack(const T& theElement)
 {
     if (m_Size >= m_BufferSize)
@@ -269,6 +263,17 @@ T& Vector<T>::Last() {
     return this->m_Data[m_Size-1];
 }
 
-template class Vector<u32>;
+template class Vector<i8 >;
+template class Vector<i16>;
 template class Vector<i32>;
+template class Vector<i64>;
+
+template class Vector<u8 >;
+template class Vector<u16>;
+template class Vector<u32>;
+template class Vector<u64>;
+
 template class Vector<f32>;
+template class Vector<f64>;
+template class Vector<bool>;
+template class Vector<char>;
