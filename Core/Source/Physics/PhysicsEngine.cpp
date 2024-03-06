@@ -1,7 +1,7 @@
 #include "Physics/PhysicsEngine.h"
 #include "PhysicsEngine.h"
 #include "Physics/Collider.h"
-#include <chrono>
+#include <iostream>
 
 
 PhysicsEngine::PhysicsEngine() {
@@ -42,29 +42,40 @@ void PhysicsEngine::UpdateObjects() {
             vel = m_Objs[i]->GetVelocity();
         }
 
+        if (pos.GetX() <= SCREEN_WIDTH || pos.GetX() >= 0) {
+            pos.SetX(-pos.GetX());
+        }
+        if (pos.GetY() <= SCREEN_HEIGHT || pos.GetY() >= 0) {
+            pos.SetY(-pos.GetY());
+        }
+
         pos = pos + vel;
         m_Objs[i]->SetPosition(pos);
     }
 }
 
-void PhysicsEngine::Simulate(i32 theTime) {
-    auto start = std::chrono::steady_clock::now();
-;
-    while (std::chrono::duration_cast<std::chrono::seconds>(
-                std::chrono::steady_clock::now() - start).count() < theTime) {
+void PhysicsEngine::Simulate() {
+    for (i32 i = 0; i < m_Objs.GetSize(); i++) {
+        for (i32 j = i+1; j < m_Objs.GetSize(); j++) {
+            // collision check
+            // Collider::CheckCollision(m_Objects[i], m_Objects[i + 1]);
 
-        for (i32 i = 0; i < m_Objs.GetSize() - 1; i++) {
-            for (i32 j = 0; j < m_Objs.GetSize() - 1; j++) {
-                // collision check
-                // Collider::CheckCollision(m_Objects[i], m_Objects[i + 1]);
-                if (i != j && m_Objs[i]->IsCollisionEnabled()) {
-                    Collider* collider1 = static_cast<Collider*>(m_Objs[i]);
-                    Collider* collider2 = static_cast<Collider*>(m_Objs[j]);
+            if (m_Objs[i]->IsCollisionEnabled()) {
+                Collider* collider1 = static_cast<Collider*>(m_Objs[i]);
+                Collider* collider2 = static_cast<Collider*>(m_Objs[j]);
+
+                if (collider1->Intersects(*collider2)) {
+                    m_Objs[i]->SetVelocity(-m_Objs[i]->GetVelocity().GetX(),
+                            -m_Objs[i]->GetVelocity().GetY());
+                    m_Objs[j]->SetVelocity(-m_Objs[j]->GetVelocity().GetX(),
+                            -m_Objs[i]->GetVelocity().GetY());
                 }
             }
+
+
         }
-        UpdateObjects();
     }
+    UpdateObjects();
 }
 
 void PhysicsEngine::SetGravity(f32 a, f32 b) {

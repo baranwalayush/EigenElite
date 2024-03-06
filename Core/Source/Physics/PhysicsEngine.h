@@ -22,7 +22,7 @@ class PhysicsEngine {
         PhysicsObject* PopPhyObject();
 
         void UpdateObjects();
-        void Simulate(i32);
+        void Simulate();
 
     private:
         static PhysicsEngine* m_Instance;

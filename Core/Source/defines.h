@@ -13,6 +13,9 @@
 #define f32 float
 #define f64 double
 
+#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 640
+
 #define MAX(X,Y) ((X>=Y) ? X : Y)
 #define MIN(X,Y) ((X<=Y) ? X : Y)
 

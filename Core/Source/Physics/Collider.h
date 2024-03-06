@@ -6,12 +6,13 @@
 class Collider : public PhysicsObject
 {
 public:
-	Collider(Vec2 theVelocity, Vec2 thePosition, bool theGravityEnabled, bool theCollisionEnabled, Shape theShape);
+	Collider(Vec2 theVelocity, Vec2 thePosition,
+            bool theGravityEnabled, bool theCollisionEnabled, Shape theShape);
 
 	bool Intersects(const Collider& theOther);
 
-private:
     Shape m_Shape;
+private:
 
 	// All these assume Circles and Rectangles are of unit height and width
 
