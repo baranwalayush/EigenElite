@@ -16,15 +16,15 @@ class Vec2
 
         Vec2(const Vec2& theVec)
             : m_X(theVec.m_X), m_Y(theVec.m_Y) {}
-        
+
 
         Vec2(Vec2&& theVec)
             : m_X(theVec.m_X), m_Y(theVec.m_Y) {}
-        
+
 
         inline f32 GetX() const {return m_X;}
         inline f32 GetY() const {return m_Y;}
-                           
+
         inline f32 SetX() const {return m_X;}
         inline f32 SetY() const {return m_Y;}
 

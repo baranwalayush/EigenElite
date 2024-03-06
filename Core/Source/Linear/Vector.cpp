@@ -134,6 +134,25 @@ void Vector<T>::PushBack(T&& theElement)
 }
 
 template<class T>
+void Vector<T>::Pop()
+{
+    if (m_Size > 0)
+    {
+        m_Data[--m_Size].~T();
+    }
+    else
+    {
+        std::cerr << "Can't Pop() on an empty vector\n";
+    }
+}
+
+template<class T>
+T& Vector<T>::Last()
+{
+    return this->m_Data[m_Size - 1];
+}
+
+template<class T>
 void Vector<T>::Clear()
 {
     for (size_t i = 0; i < m_Size; ++i)

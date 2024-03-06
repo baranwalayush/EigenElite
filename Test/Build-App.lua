@@ -27,6 +27,11 @@ project "App"
        systemversion "latest"
        defines { "WINDOWS" }
 
+   filter "system:linux"
+      systemversion "latest"
+      defines { "LINUX" }
+      buildoptions "-fsized-deallocation"
+
    filter "configurations:Debug"
        defines { "DEBUG" }
        runtime "Debug"
