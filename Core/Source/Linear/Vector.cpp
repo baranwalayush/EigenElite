@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <cwchar>
 #include <iostream>
+#include <new>
 
 #define ASSERT_VECTOR_SIZE(a, b) \
     a.m_Size == b.m_Size ? true : false
@@ -174,7 +175,6 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& theVector) {
         {
             m_Data[i].~T();
         }
-        
         ::operator delete(m_Data, m_BufferSize * sizeof(T));
 
         m_Data = aNewData;

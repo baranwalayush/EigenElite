@@ -2,6 +2,10 @@
 
 #include "defines.h"
 
+#ifdef __clang__
+using std::size_t;
+#endif
+
 template <class T>
 class Vector {
     private:
@@ -20,12 +24,16 @@ class Vector {
 
         void Print();
 
+        size_t GetSize();
+
+
         void PushBack(const T&);
         void PushBack(T&&);
+        void Pop();
 
         template<typename... Args>
         T& EmplaceBack(Args... args);
-        
+
         void Clear();
         //void EmplaceBack(Args... args);
 
