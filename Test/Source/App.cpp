@@ -10,5 +10,6 @@ int main()
 	a.Pop();
 	a.Print();
 	a.Clear();
-	a.PushBack({ 5,6 });
+	a.EmplaceBack(5, 6);
+	a.Print();
 }

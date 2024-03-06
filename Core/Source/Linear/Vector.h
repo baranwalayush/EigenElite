@@ -2,6 +2,8 @@
 
 #include "defines.h"
 
+#include <utility>
+
 #ifdef __clang__
 using std::size_t;
 #endif
@@ -32,10 +34,19 @@ class Vector {
         T& Last();
 
         template<typename... Args>
-        T& EmplaceBack(Args... args);
+        T& EmplaceBack(Args&&... args)
+        {
+            if (m_Size >= m_BufferSize)
+            {
+                if (m_BufferSize == 0)
+                    m_BufferSize = 2;
+                IncreaseBuffer(m_BufferSize + (m_BufferSize >> 1));
+            }
+            new(&m_Data[m_Size]) T(std::forward<Args>(args)...);
+            return m_Data[m_Size++];
+        }
 
         void Clear();
-        //void EmplaceBack(Args... args);
 
         T& operator[](size_t);
         const T& operator[](size_t) const;
