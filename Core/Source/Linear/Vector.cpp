@@ -1,6 +1,9 @@
 #include "Vector.h"
 #include "defines.h"
 
+#include "Physics/Vec2.h"
+#include "Physics/PhysicsObject.h"
+
 #include <cstdlib>
 #include <cwchar>
 #include <iostream>
@@ -13,7 +16,7 @@ template <class T>
 Vector<T>::Vector()
     : m_Size(0), m_BufferSize(3)
 {
-    m_Data = new T(m_BufferSize);
+    m_Data = new T[m_BufferSize];
 }
 
 template<class T>
@@ -57,14 +60,14 @@ template <class T>
 Vector<T>::Vector(size_t theBufferSize)
     : m_Size(0), m_BufferSize(theBufferSize)
 {
-    m_Data = new T(m_BufferSize);
+    m_Data = new T[m_BufferSize];
 }
 
 template<class T>
 Vector<T>::Vector(const Vector& theOther)
     : m_Size(theOther.m_Size), m_BufferSize(theOther.m_BufferSize)
 {
-    m_Data = new T(theOther.m_BufferSize);
+    m_Data = new T[theOther.m_BufferSize];
 
     for (size_t i = 0; i < theOther.m_Size; ++i)
     {
@@ -89,6 +92,7 @@ Vector<T>::~Vector()
     ::operator delete(m_Data, m_BufferSize * sizeof(T));
 }
 
+#if 0
 template <class T>
 void Vector<T>::Print() {
     for (int i = 0; i < this->m_Size; i++) {
@@ -96,6 +100,7 @@ void Vector<T>::Print() {
     }
     std::cout << "\n";
 }
+#endif
 
 template<class T>
 void Vector<T>::PushBack(const T& theElement)
@@ -159,20 +164,6 @@ const T& Vector<T>::operator[](size_t theIndex) const
 }
 
 template <class T>
-Vector<T> Vector<T>::operator+(const Vector<T>& theVector) const {
-    if (this->m_Size != theVector.m_Size) {
-        // error handling
-        std::cerr << "Operating vectors of different sizes\n";
-    }
-
-    Vector<T> newVector(this->m_BufferSize);
-    for (int i = 0; i < this->m_Size; i++) {
-        newVector.m_Data[i] = theVector.m_Data[i] + this->m_Data[i];
-    }
-    return newVector;
-}
-
-template <class T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& theVector) {
     if (this != &theVector)
     {
@@ -183,8 +174,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& theVector) {
         {
             aNewData[i] = theVector.m_Data[i];
         }
-
-        for (size_t i = 0; i < theVector.m_Size; ++i)
+for (size_t i = 0; i < theVector.m_Size; ++i)
         {
             m_Data[i].~T();
         }
@@ -229,35 +219,6 @@ bool Vector<T>::operator==(Vector<T> theVector) {
     return equal;
 }
 
-//template <class T>
-//void Vector<T>::operator=(T* theData) {
-//    for (int i = 0; i < m_Size; i++) {
-//        this->m_Data[i] = theData[i];
-//    }
-//}
-
-template <class T>
-T Vector<T>::Dot(Vector<T> theVector) {
-    if (this->m_Size != theVector.m_Size) {
-        std::cerr << "Operating vectors of different sizes\n";
-    }
-    T sum = 0;
-    for (int i = 0; i < this->m_Size; i++) {
-        sum += this->m_Data[i]*theVector.m_Data[i];
-    }
-    return sum;
-}
-
-template <class T>
-f32 Vector<T>::Magnitude() {
-    f32 sum = 0;
-    for (int i = 0; i < this->m_Size; i++) {
-        sum += this->m_Data[i] * this->m_Data[i];
-    }
-    // TODO: should return sqrt
-    return sum;
-}
-
 template <class T>
 T& Vector<T>::Last() {
     return this->m_Data[m_Size-1];
@@ -277,3 +238,5 @@ template class Vector<f32>;
 template class Vector<f64>;
 template class Vector<bool>;
 template class Vector<char>;
+template class Vector<Vec2>;
+template class Vector<PhysicsObject>;

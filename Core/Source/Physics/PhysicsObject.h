@@ -22,7 +22,7 @@ public:
 	inline bool IsCollisionEnabled() const { return m_CollisionEnabled; }
 
 	//error-> create a pure virtual function. This becomes abstract class. Object creation error
-	
+
 protected:
 	Vec2 m_Velocity;
 	Vec2 m_Position;

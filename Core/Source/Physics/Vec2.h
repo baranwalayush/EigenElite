@@ -3,11 +3,11 @@
 
 class Vec2{
     private:
-        float m_X;
-        float m_Y;
+        f32 m_X;
+        f32 m_Y;
 
     public:
-        Vec2() {}
+        Vec2(): m_X(0), m_Y(0) {}
 
         Vec2(const Vec2& theVec) {
             this->m_X = theVec.m_X;
@@ -21,13 +21,11 @@ class Vec2{
 
         Vec2(f32 a, f32 b): m_X(a), m_Y(b) {}
 
-        ~Vec2();
-
         inline f32 GetX() {return m_X;}
         inline f32 GetY() {return m_Y;}
 
-        inline f32 SetX() {return m_X;}
-        inline f32 SetY() {return m_Y;}
+        inline void SetX(f32 a) {m_X = a;}
+        inline void SetY(f32 a) {m_Y = a;}
 
         f32 dot(Vec2 theVec) {
             return (this->m_X * theVec.m_X) + (this->m_Y * theVec.m_Y);
@@ -41,8 +39,16 @@ class Vec2{
             return Vec2(this->m_X - theVec.m_X, this->m_Y - theVec.m_Y);
         }
 
-        Vec2 operator=(Vec2 theVec) {
-            return Vec2(theVec.m_X, theVec.m_Y);
+        Vec2& operator=(const Vec2& theVec) {
+            this->m_X = theVec.m_X;
+            this->m_Y = theVec.m_Y;
+            return *this;
+        }
+
+        Vec2& operator=(Vec2&& theVec) {
+            this->m_X = theVec.m_X;
+            this->m_Y = theVec.m_Y;
+            return *this;
         }
 
         bool operator==(Vec2 theVec) {
