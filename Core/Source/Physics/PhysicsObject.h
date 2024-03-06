@@ -1,7 +1,7 @@
 #pragma once
 #include "defines.h"
 
-#include "Physics/Vector2.h"
+#include "Physics/Vec2.h"
 
 class PhysicsObject
 {

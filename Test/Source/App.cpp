@@ -1,5 +1,4 @@
-#include "Linear/Core.h"
-#include "Linear/Matrix.h"
+#include "test.h"
 
 int main()
 {
