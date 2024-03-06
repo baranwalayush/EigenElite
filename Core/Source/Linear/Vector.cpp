@@ -124,6 +124,19 @@ void Vector<T>::PushBack(T&& theElement)
 }
 
 template<class T>
+void Vector<T>::Pop()
+{
+    if (m_Size > 0)
+    {
+        m_Data[--m_Size].~T();
+    }
+    else
+    {
+        std::cerr << "Can't Pop() on an empty vector\n";
+    }
+}
+
+template<class T>
 void Vector<T>::Clear()
 {
     for (size_t i = 0; i < m_Size; ++i)
@@ -245,6 +258,22 @@ f32 Vector<T>::Magnitude() {
     return sum;
 }
 
-template class Vector<u32>;
+template <class T>
+T& Vector<T>::Last() {
+    return this->m_Data[m_Size-1];
+}
+
+template class Vector<i8 >;
+template class Vector<i16>;
 template class Vector<i32>;
+template class Vector<i64>;
+
+template class Vector<u8 >;
+template class Vector<u16>;
+template class Vector<u32>;
+template class Vector<u64>;
+
 template class Vector<f32>;
+template class Vector<f64>;
+template class Vector<bool>;
+template class Vector<char>;

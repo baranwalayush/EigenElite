@@ -24,12 +24,12 @@ class Vector {
 
         void Print();
 
-        size_t GetSize();
-
+        inline size_t GetSize() const {return m_Size;}
 
         void PushBack(const T&);
         void PushBack(T&&);
         void Pop();
+        T& Last();
 
         template<typename... Args>
         T& EmplaceBack(Args... args);

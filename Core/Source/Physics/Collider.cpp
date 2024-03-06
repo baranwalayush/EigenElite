@@ -14,6 +14,6 @@ bool Collider::Intersects(const Collider& theOther)
 
 bool Collider::intersectCircleCircle(const Collider& theFirst, const Collider& theSecond)
 {
-	return (SQ(theFirst.GetPosition().x - theSecond.GetPosition().x) + SQ(theFirst.GetPosition().y - theSecond.GetPosition().y)) < 1;
+	return (SQ(theFirst.GetPosition().GetX() - theSecond.GetPosition().GetX()) + SQ(theFirst.GetPosition().GetY() - theSecond.GetPosition().GetY())) < 1;
 }
 
