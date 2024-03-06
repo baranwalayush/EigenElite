@@ -245,6 +245,15 @@ f32 Vector<T>::Magnitude() {
     return sum;
 }
 
+template <class T>
+void Vector<T>::SetSize(i32) {
+}
+
+template <class T>
+T& Vector<T>::Last() {
+    return this->m_Data[m_Size];
+}
+
 template class Vector<u32>;
 template class Vector<i32>;
 template class Vector<f32>;

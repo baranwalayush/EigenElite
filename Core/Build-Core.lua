@@ -23,6 +23,7 @@ project "Core"
        defines { "DEBUG" }
        runtime "Debug"
        symbols "On"
+       buildoptions "-fsized-deallocation"
 
    filter "configurations:Release"
        defines { "RELEASE" }
