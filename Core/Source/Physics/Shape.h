@@ -1,12 +1,12 @@
 #pragma once
+
 class Shape
 {
 public:
 	enum Type
 	{
-		Circle, Square
+		Circle
 	};
-
 	inline Type GetType() const
 	{
 		return m_Type;
