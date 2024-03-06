@@ -106,7 +106,6 @@ Vector<T> Matrix<T>::GetColumn(size_t theCol)
 template<typename T>
 inline T Matrix<T>::At(size_t theX, size_t theY) const
 {
-	
 	return m_Data[theX * m_Y + theY];
 }
 
