@@ -40,15 +40,9 @@ class Vector {
         T& operator[](size_t);
         const T& operator[](size_t) const;
 
-        Vector<T> operator+(const Vector&) const;
-        Vector<T> operator-(Vector);
-
         Vector<T>& operator=(const Vector&);
         Vector<T>& operator=(Vector&&);
 
         bool operator==(Vector);
-        //void operator=(T*);
-        T Dot(Vector);
-        Vector<T> Cross(Vector);
-        f32 Magnitude();
+        
 };

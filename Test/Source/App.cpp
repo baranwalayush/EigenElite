@@ -3,16 +3,13 @@
 
 int main()
 {
-	Matrix<int> mat1(2, 3);
-	mat1[0][0] = 1;
-	mat1[0][1] = 2;
-	mat1[0][2] = 3;
-	mat1[1][0] = 4;
-	mat1[1][1] = 5;
-	mat1[1][2] = 6;
-
-	mat1.Print();
-
-	auto mat2 = mat1.Transpose();
-	mat2.Print();
+	Vector<Vec2> a;
+	a.PushBack({ 1, 2 });
+	a.PushBack({});
+	a.PushBack({ 3, 4 });
+	a.Print();
+	a.Pop();
+	a.Print();
+	a.Clear();
+	a.PushBack({ 5,6 });
 }
