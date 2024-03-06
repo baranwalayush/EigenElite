@@ -54,6 +54,6 @@ class Vector {
         Vector<T>& operator=(const Vector&);
         Vector<T>& operator=(Vector&&);
 
-        bool operator==(Vector);
+        bool operator==(const Vector&);
         
 };

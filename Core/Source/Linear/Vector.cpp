@@ -203,7 +203,7 @@ Vector<T>& Vector<T>::operator=(Vector&& theVector)
 }
 
 template <class T>
-bool Vector<T>::operator==(Vector<T> theVector) {
+bool Vector<T>::operator==(const Vector<T>& theVector) {
     if (this->m_Size != theVector.m_Size) {
         std::cerr << "Operating vectors of different sizes\n";
         return false;
