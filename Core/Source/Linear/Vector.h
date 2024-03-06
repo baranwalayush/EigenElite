@@ -2,7 +2,9 @@
 
 #include "defines.h"
 
+#ifdef __clang__
 using std::size_t;
+#endif
 
 template <class T>
 class Vector {
@@ -22,7 +24,7 @@ class Vector {
 
         void Print();
 
-        size_t Size();
+        size_t GetSize();
 
 
         void PushBack(const T&);
