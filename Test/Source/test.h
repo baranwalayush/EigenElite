@@ -54,11 +54,14 @@ void TestVector() {
 
 
 void TestEngine() {
-    PhysicsObject a(Vec2(1, 2), Vec2(1, 2), false, false);
-    PhysicsObject b(Vec2(1, 2), Vec2(1, 2), false, false);
-    PhysicsObject c(Vec2(1, 2), Vec2(1, 2), false, false);
+    PhysicsObject a(Vec2(1, 2), Vec2(1, 2), true, true);
+    PhysicsObject b(Vec2(1, 2), Vec2(1, 2), true, true);
+    PhysicsObject c(Vec2(1, 2), Vec2(1, 2), true, true);
 
     PhysicsEngine* engine = PhysicsEngine::GetInstance();
+    engine->PushPhyObject(&a);
+    engine->PushPhyObject(&b);
+    engine->PushPhyObject(&c);
 }
 
 void TestCollider() {

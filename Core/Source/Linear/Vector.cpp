@@ -16,7 +16,7 @@ template <class T>
 Vector<T>::Vector()
     : m_Size(0), m_BufferSize(3)
 {
-    m_Data = new T[m_BufferSize];
+    m_Data = (T*)::operator new(m_BufferSize * sizeof(T));
 }
 
 template<class T>
@@ -60,14 +60,14 @@ template <class T>
 Vector<T>::Vector(size_t theBufferSize)
     : m_Size(0), m_BufferSize(theBufferSize)
 {
-    m_Data = new T[m_BufferSize];
+    m_Data = (T*)::operator new(m_BufferSize * sizeof(T));
 }
 
 template<class T>
 Vector<T>::Vector(const Vector& theOther)
     : m_Size(theOther.m_Size), m_BufferSize(theOther.m_BufferSize)
 {
-    m_Data = new T[theOther.m_BufferSize];
+    m_Data = (T*)::operator new(m_BufferSize * sizeof(T));
 
     for (size_t i = 0; i < theOther.m_Size; ++i)
     {
@@ -101,6 +101,14 @@ void Vector<T>::Print() {
     std::cout << "\n";
 }
 #endif
+
+template <>
+void Vector<Vec2>::Print() {
+    for (int i = 0; i < this->m_Size; i++) {
+        std::cout << this->m_Data[i].GetX() << ", " << this->m_Data[i].GetY() << " ";
+    }
+    std::cout << "\n";
+}
 
 template<class T>
 void Vector<T>::PushBack(const T& theElement)
@@ -142,6 +150,12 @@ void Vector<T>::Pop()
 }
 
 template<class T>
+T& Vector<T>::Last()
+{
+    return this->m_Data[m_Size - 1];
+}
+
+template<class T>
 void Vector<T>::Clear()
 {
     for (size_t i = 0; i < m_Size; ++i)
@@ -167,7 +181,7 @@ template <class T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& theVector) {
     if (this != &theVector)
     {
-        T* aNewData = new T[theVector.m_BufferSize];
+        T* aNewData = (T*)::operator new(m_BufferSize * sizeof(T));;
         // Not memcpy or std::copy(theVector.m_Data, theVector.m_Data + theVector.m_Size, aNewData);
 
         for (size_t i = 0; i < theVector.m_Size; ++i)
@@ -219,24 +233,17 @@ bool Vector<T>::operator==(Vector<T> theVector) {
     return equal;
 }
 
-template <class T>
-T& Vector<T>::Last() {
-    return this->m_Data[m_Size-1];
-}
-
 template class Vector<i8 >;
 template class Vector<i16>;
 template class Vector<i32>;
 template class Vector<i64>;
-
 template class Vector<u8 >;
 template class Vector<u16>;
 template class Vector<u32>;
 template class Vector<u64>;
-
 template class Vector<f32>;
 template class Vector<f64>;
 template class Vector<bool>;
 template class Vector<char>;
 template class Vector<Vec2>;
-template class Vector<PhysicsObject>;
+template class Vector<PhysicsObject*>;

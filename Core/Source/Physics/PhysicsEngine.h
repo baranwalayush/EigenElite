@@ -8,9 +8,9 @@ class PhysicsEngine {
     private:
         Vec2 m_Gravity;
         Vector<PhysicsObject*> m_Objs;
-        PhysicsEngine();
 
     public:
+        PhysicsEngine();
 
         void SetGravity(f32, f32);
         inline Vec2 GetGravity() {return m_Gravity;}
@@ -28,5 +28,5 @@ class PhysicsEngine {
         static PhysicsEngine* m_Instance;
 };
 
-PhysicsEngine* PhysicsEngine::m_Instance = nullptr;
 
+inline PhysicsEngine* PhysicsEngine::m_Instance = nullptr;

@@ -4,9 +4,9 @@
 #include <chrono>
 
 
-// PhysicsEngine::PhysicsEngine() {
-//     // SetGravity(0.f, 0.f);
-// }
+PhysicsEngine::PhysicsEngine() {
+    // SetGravity(0.f, 0.f);
+}
 
 PhysicsEngine* PhysicsEngine::GetInstance() {
     if (m_Instance == nullptr) {
@@ -29,9 +29,19 @@ PhysicsObject* PhysicsEngine::PopPhyObject() {
 }
 
 void PhysicsEngine::UpdateObjects() {
+    Vec2 pos;
+    Vec2 vel;
+
     for (int i = 0; i < m_Objs.GetSize(); i++) {
-        Vec2 pos = m_Objs[i]->GetPosition();
-        Vec2 vel = m_Objs[i]->GetVelocity();
+        if (m_Objs[i]->IsGravityEnabled()) {
+            pos = m_Objs[i]->GetPosition() + GetGravity();
+            vel = m_Objs[i]->GetVelocity() + GetGravity();
+        }
+        else {
+            pos = m_Objs[i]->GetPosition();
+            vel = m_Objs[i]->GetVelocity();
+        }
+
         pos = pos + vel;
         m_Objs[i]->SetPosition(pos);
     }
@@ -47,7 +57,7 @@ void PhysicsEngine::Simulate(i32 theTime) {
             for (i32 j = 0; j < m_Objs.GetSize() - 1; j++) {
                 // collision check
                 // Collider::CheckCollision(m_Objects[i], m_Objects[i + 1]);
-                if (i != j) {
+                if (i != j && m_Objs[i]->IsCollisionEnabled()) {
                     Collider* collider1 = static_cast<Collider*>(m_Objs[i]);
                     Collider* collider2 = static_cast<Collider*>(m_Objs[j]);
                 }
