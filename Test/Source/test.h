@@ -26,7 +26,7 @@ void TestDefines() {
 
 template <class T>
 void TestMatrix() {
-    Matrix<T> x0(3, 2);
+    Cybug::Matrix<T> x0(3, 2);
 
     for (T i = 0; i < x0.GetRowSize(); i++) {
         for (T j = 0; j < x0.GetColumnSize(); j++) {
@@ -34,7 +34,7 @@ void TestMatrix() {
         }
     }
     x0.Print();
-    Matrix<T> x1 = x0.Transpose();
+    Cybug::Matrix<T> x1 = x0.Transpose();
     x1.Print();
 
     std::cout << x1.Trace() << std::endl;;
@@ -54,14 +54,20 @@ void TestVector() {
 
 
 void TestEngine() {
-    PhysicsObject a(Vec2(1, 2), Vec2(1, 2), true, true);
-    PhysicsObject b(Vec2(1, 2), Vec2(1, 2), true, true);
-    PhysicsObject c(Vec2(1, 2), Vec2(1, 2), true, true);
+    Collider a(Vec2(0, 2), Vec2(0, -2), true, true, Shape::Type::Circle);
+    Collider b(Vec2(0, -2), Vec2(0, 2), true, true, Shape::Type::Circle);
 
     PhysicsEngine* engine = PhysicsEngine::GetInstance();
     engine->PushPhyObject(&a);
     engine->PushPhyObject(&b);
-    engine->PushPhyObject(&c);
+
+    int i = 5;
+    while (i) {
+        engine->Simulate();
+        cout << engine->GetPhysicsObject(0)->GetPosition().GetX() << " " <<
+             engine->GetPhysicsObject(0)->GetPosition().GetY() << endl;
+        i--;
+    }
 }
 
 void TestCollider() {

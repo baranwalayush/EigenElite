@@ -1,4 +1,5 @@
 #include "test.h"
+#include "raylib.h"
 
 using std::cout, std::endl;
 
@@ -6,83 +7,26 @@ void RunTest();
 
 int main(void)
 {
+    Collider a(Vec2(10, 10), Vec2(100, 100), false, false, Shape::Type::Circle);
+    PhysicsEngine* engine = PhysicsEngine::GetInstance();
+    engine->PushPhyObject(&a);
     RunTest();
-	Vector<Vec2> a;
-	a.PushBack({ 1, 2 });
-	a.PushBack({});
-	a.PushBack({ 3, 4 });
-	a.Print();
-	a.Pop();
-	a.Print();
-	a.Clear();
-	a.EmplaceBack(5, 6);
-	a.Print();
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TITLE");
+
+    SetTargetFPS(60);
+    while (!WindowShouldClose()) {
+        engine->UpdateObjects();
+        BeginDrawing();
+        ClearBackground(BLACK);
+        DrawCircle((int)a.GetPosition().GetX(), (int)a.GetPosition().GetY(), 10.0f, WHITE);
+        EndDrawing();
+        cout << a.GetPosition().GetY() << " " << a.GetPosition().GetX() << endl;
+    }
+    
+    CloseWindow();
 }
 
 void RunTest() {
-    TestDefines<i8 >();
-    cout << "i8--------------------------------------------------" << endl;
-    TestDefines<i16>();
-    cout << "i16--------------------------------------------------" << endl;
-    TestDefines<i32>();
-    cout << "i32--------------------------------------------------" << endl;
-    TestDefines<i64>();
-    cout << "i64--------------------------------------------------" << endl;
-    TestDefines<u8 >();
-    cout << "u8--------------------------------------------------" << endl;
-    TestDefines<u16>();
-    cout << "u16--------------------------------------------------" << endl;
-    TestDefines<u32>();
-    cout << "u32--------------------------------------------------" << endl;
-    TestDefines<u64>();
-    cout << "u64--------------------------------------------------" << endl;
-    TestDefines<f32>();
-    cout << "f32--------------------------------------------------" << endl;
-    TestDefines<f64>();
-    cout << "f64--------------------------------------------------" << endl;
-
-    cout << "MATRIX--------------------------------------------------" << endl;
-    TestMatrix<i8 >();
-    cout << "i8--------------------------------------------------" << endl;
-    TestMatrix<i16>();
-    cout << "i16--------------------------------------------------" << endl;
-    TestMatrix<i32>();
-    cout << "i32--------------------------------------------------" << endl;
-    TestMatrix<i64>();
-    cout << "i64--------------------------------------------------" << endl;
-    TestMatrix<u8 >();
-    cout << "u8--------------------------------------------------" << endl;
-    TestMatrix<u16>();
-    cout << "u16--------------------------------------------------" << endl;
-    TestMatrix<u32>();
-    cout << "u32--------------------------------------------------" << endl;
-    TestMatrix<u64>();
-    cout << "u64--------------------------------------------------" << endl;
-    TestMatrix<f32>();
-    cout << "f32--------------------------------------------------" << endl;
-    TestMatrix<f64>();
-    cout << "f64--------------------------------------------------" << endl;
-
-    cout << "VECTOR--------------------------------------------------" << endl;
-    TestVector<i8 >();
-    cout << "i8--------------------------------------------------" << endl;
-    TestVector<i16>();
-    cout << "i16--------------------------------------------------" << endl;
-    TestVector<i32>();
-    cout << "i32--------------------------------------------------" << endl;
-    TestVector<i64>();
-    cout << "i64--------------------------------------------------" << endl;
-    TestVector<u8 >();
-    cout << "u8--------------------------------------------------" << endl;
-    TestVector<u16>();
-    cout << "u16--------------------------------------------------" << endl;
-    TestVector<u32>();
-    cout << "u32--------------------------------------------------" << endl;
-    TestVector<u64>();
-    cout << "u64--------------------------------------------------" << endl;
-    TestVector<f32>();
-    cout << "f32--------------------------------------------------" << endl;
-    TestVector<f64>();
-    cout << "f64--------------------------------------------------" << endl;
+    TestEngine();
 }
 
