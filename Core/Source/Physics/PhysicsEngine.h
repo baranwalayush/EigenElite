@@ -6,7 +6,7 @@
 
 class PhysicsEngine {
     private:
-        Vec2<f32> m_Gravity;
+        Vec2 m_Gravity;
         Vector<PhysicsObject> m_Objs;
 
     public:
@@ -14,14 +14,16 @@ class PhysicsEngine {
         PhysicsEngine(f32, f32);
 
         void SetGravity(f32, f32);
-        Vec2<f32> SetGravity();
+        Vec2 SetGravity();
+
+        PhysicsEngine* GetInstance();
 
         PhysicsObject& GetPhysicsObject(i32);
         void PushPhyObject(PhysicsObject&);
         PhysicsObject& PopPhyObject();
-        PhysicsEngine* GetInstance();
+
+        void UpdateObjects();
         void Simulate(i32);
-        void UpdateObject();
 
     private:
         static PhysicsEngine* m_Instance;

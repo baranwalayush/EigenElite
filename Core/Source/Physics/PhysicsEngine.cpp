@@ -18,6 +18,10 @@ PhysicsEngine* PhysicsEngine::GetInstance() {
     return m_Instance;
 }
 
+PhysicsObject& PhysicsEngine::GetPhysicsObject(i32 theIndex) {
+    return this->m_Objs[theIndex];
+}
+
 void PhysicsEngine::PushPhyObject(PhysicsObject& theObject) {
     m_Objs.PushBack(theObject);
 }
@@ -27,8 +31,13 @@ PhysicsObject& PhysicsEngine::PopPhyObject() {
     return m_Objs.Last();
 }
 
-void PhysicsEngine::UpdateObject() {
-    
+void PhysicsEngine::UpdateObjects() {
+    for (int i = 0; i < m_Objs.GetSize(); i++) {
+        Vec2 pos = m_Objs[i].GetPosition();
+        Vec2 vel = m_Objs[i].GetVelocity();
+        pos = pos + vel;
+        m_Objs[i].SetPosition(pos);
+    }
 }
 
 void PhysicsEngine::Simulate(i32 theTime) {
@@ -41,6 +50,7 @@ void PhysicsEngine::Simulate(i32 theTime) {
             // collision check
             // Collider::CheckCollision(m_Objects[i], m_Objects[i + 1]);
         }
+        UpdateObjects();
     }
 }
 
