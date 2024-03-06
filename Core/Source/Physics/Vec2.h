@@ -30,11 +30,11 @@ class Vec2
             return (this->m_X * theVec.m_X) + (this->m_Y * theVec.m_Y);
         }
 
-        Vec2 operator+(Vec2 theVec) {
+        Vec2 operator+(const Vec2& theVec) {
             return Vec2(this->m_X + theVec.m_X, this->m_Y + theVec.m_Y);
         }
 
-        Vec2 operator-(Vec2 theVec) {
+        Vec2 operator-(const Vec2& theVec) {
             return Vec2(this->m_X - theVec.m_X, this->m_Y - theVec.m_Y);
         }
 
@@ -59,7 +59,7 @@ class Vec2
         }
 
 
-        bool operator==(Vec2 theVec) {
+        bool operator==(const Vec2& theVec) {
             if (theVec.m_X == this->m_X && theVec.m_Y == this->m_Y) {
                 return true;
             }

@@ -20,20 +20,6 @@ Vector<T>::Vector()
 }
 
 template<class T>
-template<typename ...Args>
-T& Vector<T>::EmplaceBack(Args ...args)
-{
-    if (m_Size >= m_BufferSize)
-    {
-        if (m_BufferSize == 0)
-            m_BufferSize = 2;
-        IncreaseBuffer(m_BufferSize + (m_BufferSize >> 1));
-    }
-    new(&m_Data[m_Size]) T(std::forward<Args>(args)...);
-    return m_Data[m_Size++];
-}
-
-template<class T>
 void Vector<T>::IncreaseBuffer(size_t theNewBuffer)
 {
     m_BufferSize = theNewBuffer; // Increase the buffer
@@ -218,7 +204,7 @@ Vector<T>& Vector<T>::operator=(Vector&& theVector)
 }
 
 template <class T>
-bool Vector<T>::operator==(Vector<T> theVector) {
+bool Vector<T>::operator==(const Vector<T>& theVector) {
     if (this->m_Size != theVector.m_Size) {
         std::cerr << "Operating vectors of different sizes\n";
         return false;
