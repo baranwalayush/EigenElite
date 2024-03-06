@@ -98,6 +98,12 @@ void Vector<T>::Print() {
 }
 
 template<class T>
+inline size_t Vector<T>::GetSize() const
+{
+    return m_Size;
+}
+
+template<class T>
 void Vector<T>::PushBack(const T& theElement)
 {
     if (m_Size >= m_BufferSize)
@@ -121,6 +127,19 @@ void Vector<T>::PushBack(T&& theElement)
     }
 
     m_Data[m_Size++] = std::move(theElement);
+}
+
+template<class T>
+void Vector<T>::Pop()
+{
+    if (m_Size > 0)
+    {
+        m_Data[--m_Size].~T();
+    }
+    else
+    {
+        std::cerr << "Can't Pop() on an empty vector\n";
+    }
 }
 
 template<class T>
@@ -246,12 +265,8 @@ f32 Vector<T>::Magnitude() {
 }
 
 template <class T>
-void Vector<T>::SetSize(i32) {
-}
-
-template <class T>
 T& Vector<T>::Last() {
-    return this->m_Data[m_Size];
+    return this->m_Data[m_Size-1];
 }
 
 template class Vector<u32>;

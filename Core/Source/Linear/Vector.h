@@ -24,8 +24,7 @@ class Vector {
 
         void Print();
 
-        size_t GetSize();
-        void SetSize(i32);
+        inline size_t GetSize() const;
 
         void PushBack(const T&);
         void PushBack(T&&);

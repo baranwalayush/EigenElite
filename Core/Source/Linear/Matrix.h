@@ -53,20 +53,3 @@ private:
 	size_t m_Size;
 	T* m_Data;
 };
-/*
-member data
-- dataType\[row][column]
-
-member function
-- operator+(Matrix)
--operator-(Matrix)
--operator\ * (Matrix)
--operator\ * (int)
--operator=(Matrix)
--operator==(Matrix)
--operator\[]\[](int, int)
-- norm
-- eigenValues
-- vector_product(Vector)
-*/
-
