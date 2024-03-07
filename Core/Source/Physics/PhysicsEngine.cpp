@@ -45,11 +45,9 @@ void PhysicsEngine::UpdateObjects() {
 
         if (pos.GetX() > SCREEN_WIDTH || pos.GetX() < 0) {
             vel.SetX(-vel.GetX());
-            // pos.SetX(pos.GetX()-10);
         }
         if (pos.GetY() > SCREEN_HEIGHT || pos.GetY() < 0) {
             vel.SetY(-vel.GetY());
-            // pos.SetY(pos.GetY()-10);
         }
 
         pos = pos + vel;

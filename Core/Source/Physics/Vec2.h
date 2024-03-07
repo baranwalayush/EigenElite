@@ -26,6 +26,15 @@ class Vec2
         inline void SetX(f32 a) {m_X = a;}
         inline void SetY(f32 a) {m_Y = a;}
 
+        void Normalize()
+        {
+            f32 aDistInvSq = SQ(m_X) + SQ(m_Y);
+            f32 aDistInvSqrt;
+            FAST_INV_SQRT(aDistInvSq, aDistInvSqrt)
+            this->m_X *= aDistInvSqrt;
+            this->m_Y *= aDistInvSqrt;
+        }
+
         f32 dot(Vec2 theVec) {
             return (this->m_X * theVec.m_X) + (this->m_Y * theVec.m_Y);
         }
