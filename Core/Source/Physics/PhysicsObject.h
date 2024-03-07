@@ -6,7 +6,8 @@
 class PhysicsObject
 {
 public:
-	PhysicsObject(Vec2 theVelocity, Vec2 thePosition, bool theGravityEnabled, bool theCollisionEnabled)
+	PhysicsObject(Vec2 theVelocity, Vec2 thePosition,
+            bool theGravityEnabled, bool theCollisionEnabled)
 		: m_Velocity(theVelocity), m_Position(thePosition), m_GravityEnabled(theGravityEnabled), m_CollisionEnabled(theCollisionEnabled) {}
 
 	inline void SetVelocity(Vec2 theVelocity) { m_Velocity = theVelocity; }
@@ -22,7 +23,7 @@ public:
 	inline bool IsCollisionEnabled() const { return m_CollisionEnabled; }
 
 	//error-> create a pure virtual function. This becomes abstract class. Object creation error
-	
+
 protected:
 	Vec2 m_Velocity;
 	Vec2 m_Position;

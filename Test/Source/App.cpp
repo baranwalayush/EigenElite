@@ -1,15 +1,32 @@
 #include "test.h"
+#include "raylib.h"
 
-int main()
+using std::cout, std::endl;
+
+void RunTest();
+
+int main(void)
 {
-	Vector<Vec2> a;
-	a.PushBack({ 1, 2 });
-	a.PushBack({});
-	a.PushBack({ 3, 4 });
-	a.Print();
-	a.Pop();
-	a.Print();
-	a.Clear();
-	a.EmplaceBack(5, 6);
-	a.Print();
+    Collider a(Vec2(10, 10), Vec2(100, 100), false, false, Shape::Type::Circle);
+    PhysicsEngine* engine = PhysicsEngine::GetInstance();
+    engine->PushPhyObject(&a);
+    RunTest();
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TITLE");
+
+    SetTargetFPS(60);
+    while (!WindowShouldClose()) {
+        engine->UpdateObjects();
+        BeginDrawing();
+        ClearBackground(BLACK);
+        DrawCircle((int)a.GetPosition().GetX(), (int)a.GetPosition().GetY(), 10.0f, WHITE);
+        EndDrawing();
+        cout << a.GetPosition().GetY() << " " << a.GetPosition().GetX() << endl;
+    }
+    
+    CloseWindow();
 }
+
+void RunTest() {
+    TestEngine();
+}
+

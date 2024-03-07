@@ -7,27 +7,26 @@
 class PhysicsEngine {
     private:
         Vec2 m_Gravity;
-        Vector<PhysicsObject> m_Objs;
+        Vector<PhysicsObject*> m_Objs;
 
     public:
         PhysicsEngine();
-        PhysicsEngine(f32, f32);
 
         void SetGravity(f32, f32);
-        Vec2 SetGravity();
+        inline Vec2 GetGravity() {return m_Gravity;}
 
-        PhysicsEngine* GetInstance();
+        static PhysicsEngine* GetInstance();
 
-        PhysicsObject& GetPhysicsObject(i32);
-        void PushPhyObject(PhysicsObject&);
-        PhysicsObject& PopPhyObject();
+        PhysicsObject* GetPhysicsObject(i32);
+        void PushPhyObject(PhysicsObject*);
+        PhysicsObject* PopPhyObject();
 
         void UpdateObjects();
-        void Simulate(i32);
+        void Simulate();
 
     private:
         static PhysicsEngine* m_Instance;
 };
 
-PhysicsEngine* PhysicsEngine::m_Instance = nullptr;
 
+inline PhysicsEngine* PhysicsEngine::m_Instance = nullptr;

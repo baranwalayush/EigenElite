@@ -1,6 +1,7 @@
 #include "Matrix.h"
 
 
+namespace Cybug {
 template<typename T>
 inline Matrix<T>::Matrix(size_t theX, size_t theY)
 	: m_X(theX), m_Y(theY)
@@ -123,3 +124,5 @@ template class Matrix<f32>;
 template class Matrix<f64>;
 template class Matrix<bool>;
 template class Matrix<char>;
+
+}

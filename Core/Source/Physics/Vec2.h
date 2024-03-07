@@ -4,8 +4,8 @@
 class Vec2
 {
     private:
-        float m_X;
-        float m_Y;
+        f32 m_X;
+        f32 m_Y;
 
     public:
         Vec2()
@@ -17,16 +17,14 @@ class Vec2
         Vec2(const Vec2& theVec)
             : m_X(theVec.m_X), m_Y(theVec.m_Y) {}
 
-
         Vec2(Vec2&& theVec)
             : m_X(theVec.m_X), m_Y(theVec.m_Y) {}
 
 
         inline f32 GetX() const {return m_X;}
         inline f32 GetY() const {return m_Y;}
-
-        inline f32 SetX() const {return m_X;}
-        inline f32 SetY() const {return m_Y;}
+        inline void SetX(f32 a) {m_X = a;}
+        inline void SetY(f32 a) {m_Y = a;}
 
         f32 dot(Vec2 theVec) {
             return (this->m_X * theVec.m_X) + (this->m_Y * theVec.m_Y);
@@ -49,7 +47,7 @@ class Vec2
 
             return *this;
         }
-        
+
         Vec2& operator=(Vec2&& theVec) {
             if (this != &theVec)
             {
