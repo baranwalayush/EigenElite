@@ -19,4 +19,7 @@
 #define MAX(X,Y) ((X>=Y) ? X : Y)
 #define MIN(X,Y) ((X<=Y) ? X : Y)
 
+#define ABS(X) ((X < 0) ? -X : X)
+#define SIGN(X) ((X < 0) ? -1 : 1)
+
 #define SQ(X) ((X) * (X))

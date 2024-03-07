@@ -30,26 +30,25 @@ PhysicsObject* PhysicsEngine::PopPhyObject() {
 }
 
 void PhysicsEngine::UpdateObjects() {
-    Vec2 pos;
     Vec2 vel;
+    Vec2 pos;
 
     for (int i = 0; i < m_Objs.GetSize(); i++) {
-        if (m_Objs[i]->IsGravityEnabled()) {
-            pos = m_Objs[i]->GetPosition() + GetGravity();
+        pos = m_Objs[i]->GetPosition();
+        if (m_Objs[i]->IsGravityEnabled() &&
+                (pos.GetY() <= SCREEN_HEIGHT && pos.GetY() > 0)) {
             vel = m_Objs[i]->GetVelocity() + GetGravity();
         }
         else {
-            pos = m_Objs[i]->GetPosition();
             vel = m_Objs[i]->GetVelocity();
         }
 
         if (pos.GetX() > SCREEN_WIDTH || pos.GetX() < 0) {
-            vel.SetX(-vel.GetX());
+            vel.SetX(-SIGN(pos.GetX())*ABS(vel.GetX()));
             // pos.SetX(pos.GetX()-10);
         }
         if (pos.GetY() > SCREEN_HEIGHT || pos.GetY() < 0) {
-            vel.SetY(-vel.GetY());
-            // pos.SetY(pos.GetY()-10);
+            vel.SetY(-SIGN(pos.GetY())*ABS(vel.GetY()));
         }
 
         pos = pos + vel;
@@ -72,7 +71,7 @@ void PhysicsEngine::Simulate() {
                     m_Objs[i]->SetVelocity(-m_Objs[i]->GetVelocity().GetX(),
                             -m_Objs[i]->GetVelocity().GetY());
                     m_Objs[j]->SetVelocity(-m_Objs[j]->GetVelocity().GetX(),
-                            -m_Objs[i]->GetVelocity().GetY());
+                            -m_Objs[j]->GetVelocity().GetY());
                 }
             }
 

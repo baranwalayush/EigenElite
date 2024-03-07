@@ -7,22 +7,27 @@ void RunTest();
 
 int main(void)
 {
-    Collider a(Vec2(10, 10), Vec2(100, 100), false, false, Shape::Type::Circle);
+    Collider a(Vec2(1, 1), Vec2(100, 100), true, true, Shape::Type::Circle);
+    Collider b(Vec2(1, 1), Vec2(200, 100), true, true, Shape::Type::Circle);
     PhysicsEngine* engine = PhysicsEngine::GetInstance();
+    engine->SetGravity(0.0, 1.0);
     engine->PushPhyObject(&a);
+    engine->PushPhyObject(&b);
     RunTest();
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TITLE");
 
     SetTargetFPS(60);
     while (!WindowShouldClose()) {
-        engine->UpdateObjects();
+        engine->Simulate();
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawCircle((int)a.GetPosition().GetX(), (int)a.GetPosition().GetY(), 10.0f, WHITE);
+        for (i32 i = 0; i < 2; i++) {
+            DrawCircle((int)engine->GetPhysicsObject(i)->GetPosition().GetX(),
+                    (int)engine->GetPhysicsObject(i)->GetPosition().GetY(), 10.0f, WHITE);
+        }
         EndDrawing();
-        cout << a.GetPosition().GetY() << " " << a.GetPosition().GetX() << endl;
     }
-    
+
     CloseWindow();
 }
 
