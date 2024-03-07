@@ -8,10 +8,19 @@ class Collider : public PhysicsObject
 public:
 	Collider(Vec2 theVelocity, Vec2 thePosition,
             bool theGravityEnabled, bool theCollisionEnabled, Shape theShape);
-
+	/**
+	 * 
+	 * @param  Collider theOther  
+	 * @return bool               
+	 */
 	bool Intersects(const Collider& theOther) const;
-
-	static void ResolveCollision(Collider& theFirst, Collider& theSecond, f32 theCoefficientOfRestitution);
+	/**
+	 * 
+	 * @param  Collider theFirst                
+	 * @param  Collider theSecond               
+	 * @param  f32 theCoefficientOfRestitution  
+	 */
+	static void ResolveCollision(Collider& theFirst, Collider& theSecond, f32 theCoefficientOfRestitution=1.0f);
 
     Shape m_Shape;
 private:

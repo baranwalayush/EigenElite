@@ -14,7 +14,7 @@ bool Collider::Intersects(const Collider& theOther) const
 }
 
 void Collider::ResolveCollision(Collider& theFirst, Collider& theSecond,
-        f32 theCoefficientOfRestitution=1.0f)
+        f32 theCoefficientOfRestitution)
 {// Assuming unit mass
 
 	if (theFirst.IsCollisionEnabled() && theSecond.IsCollisionEnabled())

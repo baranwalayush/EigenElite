@@ -18,7 +18,10 @@ class Vector {
         T* m_Data;
         size_t m_Size;
         size_t m_BufferSize;
-
+        /**
+         * 
+         * @param  size_t theNewBuffer : 
+         */
         void IncreaseBuffer(size_t theNewBuffer);
 
     public:
@@ -27,16 +30,42 @@ class Vector {
         Vector(const Vector&);
         Vector(Vector&&);
         ~Vector();
-
+        
+        /**
+         * 
+         */
         void Print();
-
+        
+        /**
+         * 
+         * @return size_t 
+         */
         inline size_t GetSize() const {return m_Size;}
-
+        /**
+         * 
+         * @param T 
+         */
         void PushBack(const T&);
+        /**
+         * 
+         * @param  T& 
+         */
         void PushBack(T&&);
+        /**
+         * 
+         */
         void Pop();
+        /**
+         * 
+         * @return T 
+         */
         T& Last();
 
+        /**
+         * 
+         * @param  Args&... args  
+         * @return T 
+         */
         template<typename... Args>
         T& EmplaceBack(Args&&... args)
         {
@@ -49,7 +78,10 @@ class Vector {
             new(&m_Data[m_Size]) T(std::forward<Args>(args)...);
             return m_Data[m_Size++];
         }
-
+        
+        /**
+         * 
+         */
         void Clear();
 
         T& operator[](size_t);

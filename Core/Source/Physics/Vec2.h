@@ -22,12 +22,29 @@ class Vec2
         Vec2(Vec2&& theVec)
             : m_X(theVec.m_X), m_Y(theVec.m_Y) {}
 
-
+        /**
+         * 
+         * @return f32 
+         */
         inline f32 GetX() const {return m_X;}
+        /**
+         * 
+         * @return f32 
+         */
         inline f32 GetY() const {return m_Y;}
+        /**
+         * 
+         * @param  f32 
+         */
         inline void SetX(f32 a) {m_X = a;}
+        /**
+         * 
+         * @param  f32 
+         */
         inline void SetY(f32 a) {m_Y = a;}
-
+        /**
+         * 
+         */
         void Normalize()
         {
             f32 aDistInvSq = SQ(m_X) + SQ(m_Y);
@@ -37,7 +54,11 @@ class Vec2
             this->m_X /= x;
             this->m_Y /= x;
         }
-
+        /**
+         * 
+         * @param  Vec2 theVec  
+         * @return f32         
+         */
         f32 dot(Vec2 theVec) {
             return (m_X * theVec.m_X) + (m_Y * theVec.m_Y);
         }

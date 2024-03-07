@@ -28,7 +28,6 @@ namespace Cybug {
         Matrix() = delete;
         Matrix(size_t theX, size_t theY);
         Matrix(const Matrix& theMatrix);
-        // Matrix(Matrix&& theMatrix);
         ~Matrix();
 
         DoubleSubscript operator[](size_t _i)
@@ -41,12 +40,38 @@ namespace Cybug {
         Matrix<T> Transpose();
         i64 Trace();
 
+        /**
+         * 
+         * @param  size_t theRow 
+         * @return Vector<T> 
+         */
         Vector<T> GetRow(size_t theRow); // error: Return Reference --> Dangling Refernce
+        
+        /**
+         * 
+         * @param  size_t theCol  
+         * @return Vector<T>     
+         */
         Vector<T> GetColumn(size_t theCol);
-
+        
+        /**
+         * 
+         * @return size_t 
+         */
         inline size_t GetRowSize() const {return m_X;}
+        
+        /**
+         * 
+         * @return size_t 
+         */
         inline size_t GetColumnSize() const {return m_Y;}
-
+        
+        /**
+         * 
+         * @param  size_t theX 
+         * @param  size_t theY 
+         * @return T           
+         */
         inline T At(size_t theX, size_t theY) const;
 
     private:
