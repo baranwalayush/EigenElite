@@ -2,6 +2,12 @@
 
 #include "defines.h"
 
+#include <utility>
+
+#ifdef __clang__
+using std::size_t;
+#endif
+
 template <class T>
 class Vector {
     private:
@@ -20,27 +26,34 @@ class Vector {
 
         void Print();
 
+        inline size_t GetSize() const {return m_Size;}
+
         void PushBack(const T&);
         void PushBack(T&&);
+        void Pop();
+        T& Last();
 
         template<typename... Args>
-        T& EmplaceBack(Args... args);
-        
+        T& EmplaceBack(Args&&... args)
+        {
+            if (m_Size >= m_BufferSize)
+            {
+                if (m_BufferSize == 0)
+                    m_BufferSize = 2;
+                IncreaseBuffer(m_BufferSize + (m_BufferSize >> 1));
+            }
+            new(&m_Data[m_Size]) T(std::forward<Args>(args)...);
+            return m_Data[m_Size++];
+        }
+
         void Clear();
-        //void EmplaceBack(Args... args);
 
         T& operator[](size_t);
         const T& operator[](size_t) const;
 
-        Vector<T> operator+(const Vector&) const;
-        Vector<T> operator-(Vector);
-
         Vector<T>& operator=(const Vector&);
         Vector<T>& operator=(Vector&&);
 
-        bool operator==(Vector);
-        //void operator=(T*);
-        T Dot(Vector);
-        Vector<T> Cross(Vector);
-        f32 Magnitude();
+        bool operator==(const Vector&);
+        
 };

@@ -27,7 +27,7 @@ public:
 	Matrix() = delete;
 	Matrix(size_t theX, size_t theY);
 	Matrix(const Matrix& theMatrix);
-	Matrix(Matrix&& theMatrix);
+    // Matrix(Matrix&& theMatrix);
 	~Matrix();
 
 	DoubleSubscript operator[](size_t _i)
@@ -43,8 +43,8 @@ public:
 	Vector<T> GetRow(size_t theRow); // error: Return Reference --> Dangling Refernce
 	Vector<T> GetColumn(size_t theCol);
 
-	Matrix<T> Inverse();
-	int Rank();
+	inline size_t GetRowSize() const {return m_X;}
+	inline size_t GetColumnSize() const {return m_Y;}
 
 	inline T At(size_t theX, size_t theY) const;
 
@@ -53,20 +53,3 @@ private:
 	size_t m_Size;
 	T* m_Data;
 };
-/*
-member data
-- dataType\[row][column]
-
-member function
-- operator+(Matrix)
--operator-(Matrix)
--operator\ * (Matrix)
--operator\ * (int)
--operator=(Matrix)
--operator==(Matrix)
--operator\[]\[](int, int)
-- norm
-- eigenValues
-- vector_product(Vector)
-*/
-

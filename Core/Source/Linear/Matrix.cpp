@@ -22,10 +22,10 @@ Matrix<T>::Matrix(const Matrix& theMatrix)
 	}
 }
 
-template<typename T>
-Matrix<T>::Matrix(Matrix&& theMatrix)
-{
-}
+// template<typename T>
+// Matrix<T>::Matrix(Matrix&& theMatrix)
+// {
+// }
 
 template<typename T>
 Matrix<T>::~Matrix()
@@ -106,8 +106,20 @@ Vector<T> Matrix<T>::GetColumn(size_t theCol)
 template<typename T>
 inline T Matrix<T>::At(size_t theX, size_t theY) const
 {
-	
 	return m_Data[theX * m_Y + theY];
 }
 
-template class Matrix<int>;
+template class Matrix<i8 >;
+template class Matrix<i16>;
+template class Matrix<i32>;
+template class Matrix<i64>;
+
+template class Matrix<u8 >;
+template class Matrix<u16>;
+template class Matrix<u32>;
+template class Matrix<u64>;
+
+template class Matrix<f32>;
+template class Matrix<f64>;
+template class Matrix<bool>;
+template class Matrix<char>;
