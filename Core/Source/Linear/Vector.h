@@ -8,6 +8,10 @@
 using std::size_t;
 #endif
 
+#ifdef __GNUC__
+#include <cstddef>
+#endif
+
 template <class T>
 class Vector {
     private:
@@ -18,7 +22,7 @@ class Vector {
         void IncreaseBuffer(size_t theNewBuffer);
 
     public:
-        Vector<T>();
+        Vector();
         Vector(size_t theSize);
         Vector(const Vector&);
         Vector(Vector&&);

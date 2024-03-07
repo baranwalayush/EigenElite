@@ -7,14 +7,6 @@ project "App"
 
    files { "Source/**.h", "Source/**.cpp" }
 
-   includedirs
-   {
-      "Source",
-
-	  -- Include Core
-	  "../Core/Source",
-     "../Vendor/Include/Raylib/" .. folder .. "/msvc"
-   }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
@@ -30,10 +22,32 @@ project "App"
       links
       {
          "Core",
-         "../Vendor/Lib/Raylib/" .. folder .. "/**.a"
+         "../Vendor/Lib/Raylib/" .. folder .. "/:libraylib.a"
       }
    end
-      
+
+   if os.host() == "windows" then 
+      includedirs
+      {
+         "Source",
+   
+        -- Include Core
+        "../Core/Source",
+        "../Vendor/Include/Raylib/" .. folder .. "/msvc"
+      }
+   end
+
+   if os.host() == "linux" then 
+      includedirs
+      {
+         "Source",
+   
+        -- Include Core
+        "../Core/Source",
+        "../Vendor/Include/Raylib/" .. folder
+      }
+   end
+
    filter "system:windows"
       systemversion "latest"
       defines { "WINDOWS" }
