@@ -23,41 +23,31 @@ class Vec2
             : m_X(theVec.m_X), m_Y(theVec.m_Y) {}
 
         /**
-         * 
+         * Returns X
          * @return f32 
          */
         inline f32 GetX() const {return m_X;}
         /**
-         * 
+         * Returns Y
          * @return f32 
          */
         inline f32 GetY() const {return m_Y;}
-        /**
-         * 
-         * @param  f32 
-         */
         inline void SetX(f32 a) {m_X = a;}
-        /**
-         * 
-         * @param  f32 
-         */
         inline void SetY(f32 a) {m_Y = a;}
         /**
-         * 
+         * Normalizes Vec2 to [0, 1]
          */
         void Normalize()
         {
-            f32 aDistInvSq = SQ(m_X) + SQ(m_Y);
-            // FAST_INV_SQRT(aDistInvSq, aDistInvSqrt)
-            f32 x = std::sqrt(aDistInvSq);
-            // std::cout << aDistInvSq << std::endl;
+            f32 aDistSq = SQ(m_X) + SQ(m_Y);
+            f32 x = std::sqrt(aDistSq);
             this->m_X /= x;
             this->m_Y /= x;
         }
         /**
-         * 
-         * @param  Vec2 theVec  
-         * @return f32         
+         * dot product of two Vec2s
+         * @param  Vec2 theVec
+         * @return f32
          */
         f32 dot(Vec2 theVec) {
             return (m_X * theVec.m_X) + (m_Y * theVec.m_Y);

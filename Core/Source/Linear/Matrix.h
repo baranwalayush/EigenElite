@@ -46,26 +46,22 @@ namespace Cybug {
          * @return Vector<T> 
          */
         Vector<T> GetRow(size_t theRow); // error: Return Reference --> Dangling Refernce
-        
         /**
          * 
          * @param  size_t theCol  
          * @return Vector<T>     
          */
         Vector<T> GetColumn(size_t theCol);
-        
         /**
          * 
          * @return size_t 
          */
         inline size_t GetRowSize() const {return m_X;}
-        
         /**
          * 
          * @return size_t 
          */
         inline size_t GetColumnSize() const {return m_Y;}
-        
         /**
          * 
          * @param  size_t theX 

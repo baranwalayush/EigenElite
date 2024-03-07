@@ -81,6 +81,8 @@ void TestEngine() {
     }
 }
 
-void TestCollider() {
-
+void TestFastInv() {
+    f32 x = 0;
+    float y = 0.25;
+    cout << x << endl;
 }

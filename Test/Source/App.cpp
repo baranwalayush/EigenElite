@@ -23,6 +23,7 @@ class App {
             while (!WindowShouldClose()) {
                 m_Engine->Simulate();
                 BeginDrawing();
+                DrawFPS(0, 0);
                 ClearBackground(BLACK);
                 for (i32 i = 0; i < m_Engine->GetSize(); i++) {
                     DrawCircle((int)m_Engine->GetPhysicsObject(i)->GetPosition().GetX(),
@@ -48,6 +49,12 @@ i32 main(void)
     Collider e(Vec2(-1, 1), Vec2(300, 500), false, true, Shape::Type::Circle);
 
     App app;
+
+    for (int i  = 0; i < 85; i++) {
+        Collider* A = new Collider(Vec2(2, 2), Vec2(i * 20, i * 10), false, true,
+                                    Shape::Type::Circle);
+        app.Add(A);
+    }
     app.Add(&a);
     app.Add(&b);
     app.Add(&c);
@@ -56,10 +63,12 @@ i32 main(void)
 
     app.Update();
 
+    RunTest();
     return 0;
 }
 
 void RunTest() {
     TestVec2<i32>();
+    TestFastInv();
 }
 

@@ -9,16 +9,16 @@ public:
 	Collider(Vec2 theVelocity, Vec2 thePosition,
             bool theGravityEnabled, bool theCollisionEnabled, Shape theShape);
 	/**
-	 * 
-	 * @param  Collider theOther  
-	 * @return bool               
+	 * Check if the collider objects intersect
+	 * @param  Collider theOther
+	 * @return bool
 	 */
 	bool Intersects(const Collider& theOther) const;
 	/**
-	 * 
-	 * @param  Collider theFirst                
-	 * @param  Collider theSecond               
-	 * @param  f32 theCoefficientOfRestitution  
+	 * Updates the velocity of the collider objects on collision
+	 * @param  Collider theFirst
+	 * @param  Collider theSecond
+	 * @param  f32 theCoefficientOfRestitution
 	 */
 	static void ResolveCollision(Collider& theFirst, Collider& theSecond, f32 theCoefficientOfRestitution=1.0f);
 

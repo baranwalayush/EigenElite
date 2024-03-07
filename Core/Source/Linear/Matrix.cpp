@@ -23,11 +23,6 @@ Matrix<T>::Matrix(const Matrix& theMatrix)
 	}
 }
 
-// template<typename T>
-// Matrix<T>::Matrix(Matrix&& theMatrix)
-// {
-// }
-
 template<typename T>
 Matrix<T>::~Matrix()
 {

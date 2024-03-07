@@ -19,8 +19,8 @@
 #define f32 float
 #define f64 double
 
-#define SCREEN_HEIGHT 480
-#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 1920
 
 #define MAX(X,Y) ((X>=Y) ? X : Y)
 #define MIN(X,Y) ((X<=Y) ? X : Y)
@@ -31,7 +31,7 @@
 #define SQ(X) ((X) * (X))
 
 #define FPS 60
-#define CURR_FPS 30
+#define CURR_FPS 60
 
 #define FAST_INV_SQRT(x, y) \
 {\
@@ -45,7 +45,7 @@
 		y = x;								\
 		long _y = *(long *) &y; \
 		_y = 0x5f3759df - (_y >> 1); \
-		y = _y;                         \
+		y = *(float*)&_y;                         \
 		y = y * (1.5f - (_x * y * y)); \
 	}                                              \
 }

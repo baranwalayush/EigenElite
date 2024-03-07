@@ -19,8 +19,8 @@ class Vector {
         size_t m_Size;
         size_t m_BufferSize;
         /**
-         * 
-         * @param  size_t theNewBuffer : 
+         * Reserves param size memory
+         * @param  size_t theNewBuffer
          */
         void IncreaseBuffer(size_t theNewBuffer);
 
@@ -30,41 +30,41 @@ class Vector {
         Vector(const Vector&);
         Vector(Vector&&);
         ~Vector();
-        
+
         /**
-         * 
+         * Stdout the elements of the Vector
          */
         void Print();
-        
+
         /**
-         * 
-         * @return size_t 
+         * Returns the current size
+         * @return size_t
          */
         inline size_t GetSize() const {return m_Size;}
         /**
-         * 
-         * @param T 
+         * Pushes the element into the Vector
+         * @param T
          */
         void PushBack(const T&);
         /**
-         * 
-         * @param  T& 
+         * Pushes the element into the Vector
+         * @param  T&
          */
         void PushBack(T&&);
         /**
-         * 
+         * Deletes the element
          */
         void Pop();
         /**
-         * 
-         * @return T 
+         * Returns the element at Last element pushed
+         * @return T
          */
         T& Last();
 
         /**
-         * 
-         * @param  Args&... args  
-         * @return T 
+         * Pushed back elements in place
+         * @param  Args&... args
+         * @return T
          */
         template<typename... Args>
         T& EmplaceBack(Args&&... args)
@@ -78,9 +78,9 @@ class Vector {
             new(&m_Data[m_Size]) T(std::forward<Args>(args)...);
             return m_Data[m_Size++];
         }
-        
+
         /**
-         * 
+         * Clears all the elements
          */
         void Clear();
 
