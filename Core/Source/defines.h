@@ -1,6 +1,11 @@
 #pragma once
 
+#ifdef __clang__
+#include <stdint.h>
+#else
 #include <cstdint>
+#endif
+
 #include <float.h>
 
 #define i8  int8_t

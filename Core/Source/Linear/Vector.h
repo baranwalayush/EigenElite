@@ -8,7 +8,7 @@
 using std::size_t;
 #endif
 
-#ifdef __GNUC__
+#ifdef __GNUG__ 
 #include <cstddef>
 #endif
 
