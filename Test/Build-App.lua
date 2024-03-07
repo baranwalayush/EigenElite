@@ -12,25 +12,31 @@ project "App"
       "Source",
 
 	  -- Include Core
-	  "../Core/Source"
-   }
-
-   links
-   {
-      "Core"
+	  "../Core/Source",
+     "../Vendor/Include/Raylib/" .. folder .. "/msvc"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
+   if os.host() == "windows" then
+      links
+      {
+         "Core",
+         "../Vendor/Lib/Raylib/" .. folder .. "/msvc/**.lib",
+         "winmm"
+      }
+   else
+      links
+      {
+         "Core",
+         "../Vendor/Lib/Raylib/" .. folder .. "/**.a"
+      }
+   end
+      
    filter "system:windows"
-       systemversion "latest"
-       defines { "WINDOWS" }
-
-   filter "system:linux"
       systemversion "latest"
-      defines { "LINUX" }
-      buildoptions "-fsized-deallocation"
+      defines { "WINDOWS" }
 
    filter "configurations:Debug"
        defines { "DEBUG" }
