@@ -20,6 +20,7 @@ class PhysicsEngine {
         PhysicsObject* GetPhysicsObject(i32);
         void PushPhyObject(PhysicsObject*);
         PhysicsObject* PopPhyObject();
+        u32 GetSize() {return m_Objs.GetSize();}
 
         void UpdateObjects();
         void Simulate();

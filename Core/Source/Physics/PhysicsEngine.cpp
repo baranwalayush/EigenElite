@@ -51,7 +51,7 @@ void PhysicsEngine::UpdateObjects() {
             vel.SetY(-SIGN(pos.GetY())*ABS(vel.GetY()));
         }
 
-        pos = pos + vel;
+        pos = pos + (vel * ((float)FPS/CURR_FPS)) ;
         m_Objs[i]->SetPosition(pos);
         m_Objs[i]->SetVelocity(vel);
     }
@@ -62,20 +62,10 @@ void PhysicsEngine::Simulate() {
         for (i32 j = i+1; j < m_Objs.GetSize(); j++) {
             // collision check
             // Collider::CheckCollision(m_Objects[i], m_Objects[i + 1]);
-
-            if (m_Objs[i]->IsCollisionEnabled()) {
                 Collider* collider1 = static_cast<Collider*>(m_Objs[i]);
                 Collider* collider2 = static_cast<Collider*>(m_Objs[j]);
 
-                if (collider1->Intersects(*collider2)) {
-                    m_Objs[i]->SetVelocity(-m_Objs[i]->GetVelocity().GetX(),
-                            -m_Objs[i]->GetVelocity().GetY());
-                    m_Objs[j]->SetVelocity(-m_Objs[j]->GetVelocity().GetX(),
-                            -m_Objs[j]->GetVelocity().GetY());
-                }
-            }
-
-
+                Collider::ResolveCollision(*collider1, *collider2, 1);
         }
     }
     UpdateObjects();

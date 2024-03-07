@@ -78,7 +78,7 @@ Vector<T>::~Vector()
     ::operator delete(m_Data, m_BufferSize * sizeof(T));
 }
 
-#if 0
+
 template <class T>
 void Vector<T>::Print() {
     for (int i = 0; i < this->m_Size; i++) {
@@ -86,7 +86,7 @@ void Vector<T>::Print() {
     }
     std::cout << "\n";
 }
-#endif
+
 
 template <>
 void Vector<Vec2>::Print() {

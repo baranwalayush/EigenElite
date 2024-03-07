@@ -21,6 +21,8 @@ void TestDefines() {
     cout << MAX(x0, x1) << endl;
     cout << MIN(x0, x1) << endl;
     cout << SQ(6) << endl;
+    f32 x = 0;
+    FAST_INV_SQRT(0.25, x);
 }
 
 
@@ -50,6 +52,15 @@ void TestVector() {
     x0.Pop();
     cout << x0.Last() << endl;
     x0.Clear();
+}
+
+template <class T>
+void TestVec2() {
+    Vec2 a(2, 3);
+    Vec2 b(3, 3);
+
+    Vec2 c = a - b;
+    cout << c.GetX() << " " << c.GetY() << endl;
 }
 
 

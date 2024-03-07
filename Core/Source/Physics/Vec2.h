@@ -1,13 +1,15 @@
 #pragma once
 #include "Linear/Vector.h"
+#include <cmath>
+#include <iostream>
 
 class Vec2
 {
     private:
-        f32 m_X;
-        f32 m_Y;
 
     public:
+        f32 m_X;
+        f32 m_Y;
         Vec2()
             : m_X(0), m_Y(0) {}
 
@@ -26,16 +28,30 @@ class Vec2
         inline void SetX(f32 a) {m_X = a;}
         inline void SetY(f32 a) {m_Y = a;}
 
+        void Normalize()
+        {
+            f32 aDistInvSq = SQ(m_X) + SQ(m_Y);
+            // FAST_INV_SQRT(aDistInvSq, aDistInvSqrt)
+            f32 x = std::sqrt(aDistInvSq);
+            // std::cout << aDistInvSq << std::endl;
+            this->m_X /= x;
+            this->m_Y /= x;
+        }
+
         f32 dot(Vec2 theVec) {
-            return (this->m_X * theVec.m_X) + (this->m_Y * theVec.m_Y);
+            return (m_X * theVec.m_X) + (m_Y * theVec.m_Y);
         }
 
         Vec2 operator+(const Vec2& theVec) {
-            return Vec2(this->m_X + theVec.m_X, this->m_Y + theVec.m_Y);
+            return Vec2(m_X + theVec.m_X, m_Y + theVec.m_Y);
+        }
+
+        Vec2 operator*(f32 theFloat) {
+            return Vec2(m_X * theFloat, m_Y * theFloat);
         }
 
         Vec2 operator-(const Vec2& theVec) {
-            return Vec2(this->m_X - theVec.m_X, this->m_Y - theVec.m_Y);
+            return Vec2(m_X - theVec.m_X, m_Y - theVec.m_Y);
         }
 
         Vec2& operator=(const Vec2& theVec) {
