@@ -66,7 +66,7 @@ i64 Matrix<T>::Trace()
 	{
 		aTrace += m_Data[i * m_Y + i];
 	}
-	return i64();
+	return aTrace;
 }
 
 template<typename T>
