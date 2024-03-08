@@ -1,9 +1,17 @@
-#include "test.h"
 #include "raylib.h"
+
+#include "Linear/Core.h"
+#include "Linear/Matrix.h"
+#include "Linear/Vector.h"
+
+#include "Physics/Vec2.h"
+#include "Physics/PhysicsEngine.h"
+#include "Physics/PhysicsObject.h"
+#include "Physics/Collider.h"
 
 using std::cout, std::endl;
 
-void RunTest();
+void WarmupTest();
 
 class App {
         PhysicsEngine* m_Engine;
@@ -41,7 +49,7 @@ i32 App::m_Fps = CURR_FPS;
 
 i32 main(void)
 {
-    RunTest();
+    WarmupTest();
     Collider a(Vec2(4, 0), Vec2(100, 100), false, true, Shape::Type::Circle);
     Collider b(Vec2(-1, 1), Vec2(200, 100), false, true, Shape::Type::Circle);
     Collider c(Vec2(-1, 1), Vec2(300, 300), false, true, Shape::Type::Circle);
@@ -63,12 +71,25 @@ i32 main(void)
 
     app.Update();
 
-    RunTest();
     return 0;
 }
 
-void RunTest() {
-    TestVec2<i32>();
-    TestFastInv();
+void WarmupTest() {
+    Vector<Vec2> vec;
+    vec.PushBack(Vec2(1, 1));
+    vec.PushBack(Vec2(1, 2));
+    vec.PushBack(Vec2(1, 3));
+
+    vec.Clear();
+    vec.EmplaceBack(Vec2(1, 2));
+
+
+    Cybug::Matrix<f32> mat(2, 2);
+    mat[0][0] = 1;
+    mat[0][1] = 2;
+    mat[1][0] = 3;
+    mat[1][1] = 4;
+
+    mat.Trace();
 }
 
