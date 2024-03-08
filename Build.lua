@@ -11,6 +11,8 @@ workspace "EigenElite"
       else
          buildoptions "-fsized-deallocation"
       end
+   filter "system:linux"
+      buildoptions "-fsized-deallocation"
 
 OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
 
@@ -23,7 +25,6 @@ end
 
 if os.host() == "linux" then
    folder = "Linux"
-   buildoptions "-fsized-deallocation"
    print(folder)
 end
 
