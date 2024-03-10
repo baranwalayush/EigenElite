@@ -7,30 +7,72 @@ project "App"
 
    files { "Source/**.h", "Source/**.cpp" }
 
-   includedirs
-   {
-      "Source",
-
-	  -- Include Core
-	  "../Core/Source"
-   }
-
-   links
-   {
-      "Core"
-   }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
-   filter "system:windows"
-       systemversion "latest"
-       defines { "WINDOWS" }
+   if os.host() == "windows" then
+      if action == "vs2022" then
+         links
+         {
+            "Core",
+            "../Vendor/Lib/Raylib/" .. folder .. "/msvc/**.lib",
+            "winmm"
+         }
+      else
+         links
+         {
+            "Core",
+            "../Vendor/Lib/Raylib/" .. folder .. "/mingw/:libraylib.a",
+            "winmm",
+            "gdi32"
+         }
+      end
+   else
+      links
+      {
+         "Core",
+         "../Vendor/Lib/Raylib/" .. folder .. "/:libraylib.a"
+      }
+   end
 
-   filter "system:linux"
+   if os.host() == "windows" then
+      if action == "vs2022" then
+         includedirs
+         {
+            "Source",
+   
+            -- Include Core
+            "../Core/Source",
+            "../Vendor/Include/Raylib/" .. folder .. "/msvc"
+         }
+      else
+         includedirs
+         {
+            "Source",
+   
+            -- Include Core
+            "../Core/Source",
+            "../Vendor/Include/Raylib/" .. folder .. "/mingw"
+         }
+      end
+
+   end
+
+   if os.host() == "linux" then 
+      includedirs
+      {
+         "Source",
+   
+        -- Include Core
+        "../Core/Source",
+        "../Vendor/Include/Raylib/" .. folder
+      }
+   end
+
+   filter "system:windows"
       systemversion "latest"
-      defines { "LINUX" }
-      buildoptions "-fsized-deallocation"
+      defines { "WINDOWS" }
 
    filter "configurations:Debug"
        defines { "DEBUG" }

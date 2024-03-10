@@ -3,10 +3,15 @@
 class Shape
 {
 public:
-	enum Type
-	{
-		Circle
-	};
+    enum Type
+    {
+        Circle = 1,
+    };
+    Shape(Type shapeType) {m_Type = shapeType;}
+/**
+ * 
+ * @return {Type}  : 
+ */
 	inline Type GetType() const
 	{
 		return m_Type;

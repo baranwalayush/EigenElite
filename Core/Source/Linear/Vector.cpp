@@ -2,6 +2,7 @@
 #include "defines.h"
 
 #include "Physics/Vec2.h"
+#include "Physics/PhysicsObject.h"
 
 #include <cstdlib>
 #include <cwchar>
@@ -77,6 +78,7 @@ Vector<T>::~Vector()
     ::operator delete(m_Data, m_BufferSize * sizeof(T));
 }
 
+
 template <class T>
 void Vector<T>::Print() {
     for (int i = 0; i < this->m_Size; i++) {
@@ -84,6 +86,7 @@ void Vector<T>::Print() {
     }
     std::cout << "\n";
 }
+
 
 template <>
 void Vector<Vec2>::Print() {
@@ -160,7 +163,6 @@ const T& Vector<T>::operator[](size_t theIndex) const
     return this->m_Data[theIndex];
 }
 
-
 template <class T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& theVector) {
     if (this != &theVector)
@@ -172,8 +174,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& theVector) {
         {
             aNewData[i] = theVector.m_Data[i];
         }
-
-        for (size_t i = 0; i < theVector.m_Size; ++i)
+for (size_t i = 0; i < theVector.m_Size; ++i)
         {
             m_Data[i].~T();
         }
@@ -218,11 +219,17 @@ bool Vector<T>::operator==(const Vector<T>& theVector) {
     return equal;
 }
 
-
-template class Vector<u32>;
+template class Vector<i8 >;
+template class Vector<i16>;
 template class Vector<i32>;
+template class Vector<i64>;
+template class Vector<u8 >;
+template class Vector<u16>;
+template class Vector<u32>;
+template class Vector<u64>;
 template class Vector<f32>;
 template class Vector<f64>;
 template class Vector<bool>;
 template class Vector<char>;
 template class Vector<Vec2>;
+template class Vector<PhysicsObject*>;

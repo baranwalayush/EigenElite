@@ -10,5 +10,8 @@ Binaries/
 *.log
 Makefile
 
+# for tag referencing
+tags
+
 # Exclude
-!Vendor/Binaries
+!Vendor/

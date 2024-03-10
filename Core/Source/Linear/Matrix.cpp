@@ -1,6 +1,7 @@
 #include "Matrix.h"
 
 
+namespace Cybug {
 template<typename T>
 inline Matrix<T>::Matrix(size_t theX, size_t theY)
 	: m_X(theX), m_Y(theY)
@@ -21,11 +22,6 @@ Matrix<T>::Matrix(const Matrix& theMatrix)
 		m_Data[i] = theMatrix.m_Data[i];
 	}
 }
-
-// template<typename T>
-// Matrix<T>::Matrix(Matrix&& theMatrix)
-// {
-// }
 
 template<typename T>
 Matrix<T>::~Matrix()
@@ -70,7 +66,7 @@ i64 Matrix<T>::Trace()
 	{
 		aTrace += m_Data[i * m_Y + i];
 	}
-	return i64();
+	return aTrace;
 }
 
 template<typename T>
@@ -123,3 +119,5 @@ template class Matrix<f32>;
 template class Matrix<f64>;
 template class Matrix<bool>;
 template class Matrix<char>;
+
+}

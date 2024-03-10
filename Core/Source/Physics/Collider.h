@@ -6,15 +6,27 @@
 class Collider : public PhysicsObject
 {
 public:
-	Collider(Vec2 theVelocity, Vec2 thePosition, bool theGravityEnabled, bool theCollisionEnabled, Shape theShape);
+	Collider(Vec2 theVelocity, Vec2 thePosition,
+            bool theGravityEnabled, bool theCollisionEnabled, Shape theShape);
+	/**
+	 * Check if the collider objects intersect
+	 * @param  Collider theOther
+	 * @return bool
+	 */
+	bool Intersects(const Collider& theOther) const;
+	/**
+	 * Updates the velocity of the collider objects on collision
+	 * @param  Collider theFirst
+	 * @param  Collider theSecond
+	 * @param  f32 theCoefficientOfRestitution
+	 */
+	static void ResolveCollision(Collider& theFirst, Collider& theSecond, f32 theCoefficientOfRestitution=1.0f);
 
-	bool Intersects(const Collider& theOther);
-
-private:
     Shape m_Shape;
+private:
 
 	// All these assume Circles and Rectangles are of unit height and width
 
-	bool intersectCircleCircle(const Collider& theFirst, const Collider& theSecond);
+	bool intersectCircleCircle(const Collider& theFirst, const Collider& theSecond) const;
 };
 
