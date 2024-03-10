@@ -6,7 +6,7 @@ workspace "EigenElite"
 
    -- Workspace-wide build options for MSVC
    filter "system:windows"
-      if action == "vs2022" then
+      if _ACTION == "vs2022" then
          buildoptions { "/EHsc", "/Zc:preprocessor", "/Zc:__cplusplus" }
       else
          buildoptions "-fsized-deallocation"

@@ -12,7 +12,7 @@ project "App"
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
    if os.host() == "windows" then
-      if action == "vs2022" then
+      if _ACTION == "vs2022" then
          links
          {
             "Core",
@@ -37,7 +37,7 @@ project "App"
    end
 
    if os.host() == "windows" then
-      if action == "vs2022" then
+      if _ACTION == "vs2022" then
          includedirs
          {
             "Source",
