@@ -13,7 +13,6 @@ const global variables - CAPTIAL
 macro - CAPITAL (except) data type
 variable - aVariable
 
-
 # Structure
 ## Utils
 ### Macros
